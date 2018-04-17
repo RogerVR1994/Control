@@ -34,6 +34,7 @@ int k1 = 1;
 int k2 = 1;
 int k3 = 1;
 int k4 = 1;
+int punta = 13;
 
 void setup() {
   //Iniciar pines para motores como salidas
@@ -43,6 +44,7 @@ void setup() {
   pinMode(motB2, OUTPUT);
   pinMode(en1, OUTPUT);
   pinMode(en2, OUTPUT);
+  pinMode(punta, OUTPUT);
   //Iniciar pines para motores como entradas
   pinMode(encoder1, INPUT);
   pinMode(encoder2, INPUT);
@@ -58,6 +60,7 @@ void setup() {
 
 void loop() {
 
+  digitalWrite(punta, HIGH);
 	sensor.getAcceleration(&ax, &ay, &az); //Obtener Inclinación de péndulo
 	gyro1 = atan(ax/sqrt(pow(ay,2) + pow(az,2)))*(180.0/3.14);
   rpm1=rpm(encoder1);
@@ -75,6 +78,7 @@ void loop() {
   }
 
   gyro2 = gyro1;
+  digitalWrite(punta, LOW);
 }
 
 void adelante(int output){
