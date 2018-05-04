@@ -16,15 +16,16 @@ int pinEncoder;
 int pinPotenciometro;
 int en1;
 int en2;
-int motA1;
-int motA2;
-int motB1;
-int motB2;
+int motA;
+int motB;
+
 int tiempoDeMuestreo;
 int outputControlador;
 
 int angulo1;
 int angulo2;
+
+int setPoint;
 
 
 void setup(){
@@ -40,6 +41,13 @@ void loop(){
     angulo1 = analogRead(pinPotenciometro);
     velocidad1 = velocidadMotor(pinEncoder);
     outputControlador = k1*anguloPendulo(pinPotenciometro) + k2*velocidadAngularPendulo(angulo1, angulo2)+ k3*posicionMotor(pinEncoder) + k4*velocidadMotor(velocidad1, velocidad2);
+    if(angulo1 < setPoint){
+        izquierda(output);
+    }
+    else{
+        derecha(output);
+    }
+
     angulo2 = angulo1;
     velocidad2 = velocidad1;
 }
@@ -48,19 +56,15 @@ void loop(){
 void izquierda(float output){
     analogWrite(en1, output);
     analogWrite(en2, output);
-    digitalWrite(motA1, HIGH);
-    digitalWrite(motB1, HIGH);
-    digitalWrite(motA2, LOW);
-    digitalWrite(motB2, LOW);
+    digitalWrite(motA, HIGH);
+    digitalWrite(motB, LOW);
 }
 
 void derecha(float output){
     analogWrite(en1, output);
     analogWrite(en2, output);
-    digitalWrite(motA1, LOW);
-    digitalWrite(motB1, LOW);
-    digitalWrite(motA2, HIGH);
-    digitalWrite(motB2, HIGH);
+    digitalWrite(motA, LOW);
+    digitalWrite(motB, HIGH);
 }
 
 int velocidadAngularPendulo(int angulo1, int angulo2){
