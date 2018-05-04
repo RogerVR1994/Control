@@ -14,8 +14,7 @@ int k1, k2, k3, k4;
 
 int pinEncoder;
 int pinPotenciometro;
-int en1;
-int en2;
+int en;
 int motA;
 int motB;
 
@@ -29,8 +28,7 @@ int setPoint;
 
 
 void setup(){
-    pinmode(en1, OUTPUT);
-    pinmode(en2, OUTPUT);
+    pinmode(en, OUTPUT);
     pinmode(motA1, OUTPUT);
     pinmode(motA2, OUTPUT);
     pinmode(motB1, OUTPUT);
@@ -54,15 +52,13 @@ void loop(){
 
 
 void izquierda(float output){
-    analogWrite(en1, output);
-    analogWrite(en2, output);
+    analogWrite(en, output);
     digitalWrite(motA, HIGH);
     digitalWrite(motB, LOW);
 }
 
 void derecha(float output){
-    analogWrite(en1, output);
-    analogWrite(en2, output);
+    analogWrite(en, output);
     digitalWrite(motA, LOW);
     digitalWrite(motB, HIGH);
 }
